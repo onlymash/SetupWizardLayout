@@ -42,6 +42,8 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.android.setupwizardlib.util.RequireScrollHelper;
 import com.android.setupwizardlib.view.BottomScrollView;
 import com.android.setupwizardlib.view.Illustration;
@@ -318,8 +320,7 @@ public class SetupWizardLayout extends TemplateLayout {
     public void setLayoutBackground(Drawable background) {
         final View view = findManagedViewById(R.id.suw_layout_decor);
         if (view != null) {
-            //noinspection deprecation
-            view.setBackgroundDrawable(background);
+            view.setBackground(background);
         }
     }
 
@@ -329,7 +330,7 @@ public class SetupWizardLayout extends TemplateLayout {
      */
     public void setBackgroundTile(int backgroundTile) {
         final Drawable backgroundTileDrawable =
-                getContext().getResources().getDrawable(backgroundTile);
+                ContextCompat.getDrawable(getContext(), backgroundTile);
         setBackgroundTile(backgroundTileDrawable);
     }
 
@@ -342,8 +343,8 @@ public class SetupWizardLayout extends TemplateLayout {
 
     private Drawable getIllustration(int asset, int horizontalTile) {
         final Context context = getContext();
-        final Drawable assetDrawable = context.getResources().getDrawable(asset);
-        final Drawable tile = context.getResources().getDrawable(horizontalTile);
+        final Drawable assetDrawable = ContextCompat.getDrawable(context, asset);
+        final Drawable tile = ContextCompat.getDrawable(context, horizontalTile);
         return getIllustration(assetDrawable, tile);
     }
 

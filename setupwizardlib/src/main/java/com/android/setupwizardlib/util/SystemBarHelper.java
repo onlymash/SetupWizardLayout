@@ -21,6 +21,7 @@ import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Insets;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Handler;
@@ -335,12 +336,14 @@ public class SystemBarHelper {
             }
 
 
-            return insets.replaceSystemWindowInsets(
-                    insets.getSystemWindowInsetLeft(),
-                    insets.getSystemWindowInsetTop(),
-                    insets.getSystemWindowInsetRight(),
-                    bottomInset
-            );
+            return new WindowInsets.Builder(insets)
+                    .setSystemWindowInsets(Insets.of(
+                            insets.getSystemWindowInsetLeft(),
+                            insets.getSystemWindowInsetTop(),
+                            insets.getSystemWindowInsetRight(),
+                            bottomInset
+                    ))
+                    .build();
         }
     }
 }

@@ -18,6 +18,7 @@ package com.android.setupwizardlib.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Insets;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
@@ -105,12 +106,14 @@ public class StickyHeaderScrollView extends BottomScrollView {
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (getFitsSystemWindows()) {
             mStatusBarInset = insets.getSystemWindowInsetTop();
-            insets = insets.replaceSystemWindowInsets(
-                    insets.getSystemWindowInsetLeft(),
-                    0, /* top */
-                    insets.getSystemWindowInsetRight(),
-                    insets.getSystemWindowInsetBottom()
-            );
+            insets = new WindowInsets.Builder(insets)
+                    .setSystemWindowInsets(Insets.of(
+                            insets.getSystemWindowInsetLeft(),
+                            0, /* top */
+                            insets.getSystemWindowInsetRight(),
+                            insets.getSystemWindowInsetBottom()
+                    ))
+                    .build();
         }
         return insets;
     }

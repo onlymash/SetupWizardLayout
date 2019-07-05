@@ -20,6 +20,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Insets;
 import android.graphics.RectF;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -137,12 +138,14 @@ public class StickyHeaderListView extends ListView {
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         if (getFitsSystemWindows()) {
             mStatusBarInset = insets.getSystemWindowInsetTop();
-            insets.replaceSystemWindowInsets(
-                    insets.getSystemWindowInsetLeft(),
-                    0, /* top */
-                    insets.getSystemWindowInsetRight(),
-                    insets.getSystemWindowInsetBottom()
-            );
+            insets = new WindowInsets.Builder(insets)
+                    .setSystemWindowInsets(Insets.of(
+                            insets.getSystemWindowInsetLeft(),
+                            0, /* top */
+                            insets.getSystemWindowInsetRight(),
+                            insets.getSystemWindowInsetBottom()
+                    ))
+                    .build();
         }
         return insets;
     }

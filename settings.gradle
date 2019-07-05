@@ -1,1 +1,2 @@
 include ':example', ':setupwizardlib'
+rootProject.name='SetupWizardLayout'

@@ -332,20 +332,14 @@ public abstract class GenericInflater<T> {
             args[1] = attrs;
             //noinspection unchecked
             return (T) constructor.newInstance(args);
-        } catch (NoSuchMethodException e) {
-            InflateException ie = new InflateException(attrs.getPositionDescription()
-                    + ": Error inflating class "
-                    + (prefix != null ? (prefix + name) : name), e);
-            throw ie;
-
         } catch (ClassNotFoundException e) {
             // If loadClass fails, we should propagate the exception.
             throw e;
         } catch (Exception e) {
-            InflateException ie = new InflateException(attrs.getPositionDescription()
+            throw new InflateException(attrs.getPositionDescription()
                     + ": Error inflating class "
                     + (prefix != null ? (prefix + name) : name), e);
-            throw ie;
+
         }
     }
 
